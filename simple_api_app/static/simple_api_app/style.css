@@ -1,0 +1,26 @@
+html { overflow-y: scroll; }
+
+body {
+    margin: 10px;
+}
+
+#container {
+    margin-top: 10px;
+}
+
+.btn--float {
+    float: right;
+}
+
+.btn--margin-right {
+    margin-right: 10px;
+}
+
+.row--margin-bottom {
+    margin-bottom: 10px;
+}
+
+.row--margin-top {
+    margin-top: 10px;
+}
+

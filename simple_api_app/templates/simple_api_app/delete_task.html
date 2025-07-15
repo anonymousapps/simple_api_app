@@ -1,6 +1,9 @@
-<form method="post">{% csrf_token %}
-    <hr/>
-    <p>Are you sure you want to delete the task '{{ task.title }}'?</p>
-    <input type="submit" value="Yes" />
-    <input type="submit" name="cancel" value="Cancel"/>
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete the task with title <strong>{{ task.title }}</strong> ?</p>
+            <input type="submit" value="Delete" class="btn btn-danger btn-margin-right" />
+            <input type="submit" name="cancel" value="Cancel" class="btn btn-default"/>
+        </form>
+{% endblock %}

@@ -16,7 +16,7 @@ class IndexView(generic.ListView):
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        return Task.objects.order_by("-due_date")
+        return Task.objects.order_by("due_date")
 
 # Add/Edit a Task
 def task(request, task_id=None):

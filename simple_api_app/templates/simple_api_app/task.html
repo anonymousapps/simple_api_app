@@ -1,16 +1,38 @@
-<form action="" method="post">{% csrf_token %}
+{% extends "base.html" %}
 
+{% block navigation %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'simple_api_app:index' %}">Home</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
     {% for field in form %}
     <div class="form-group">
-        <label for="id_{{ field.name }}">{{ field.label }}</label>
+        <label class="control-label" for="id_{{ field.name }}">{{ field.label }}</label>
         <p>{{field}}</p>
-        <p>{{field.help_text}}</p>
+        <small id="{{ field.name }}Help" class="form-text text-muted">{{field.help_text}}</small>
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{ error|escape }}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
     {% endfor %}
 
-    <input type="submit" value="Save">
+    <div class="btn-group">
+    <input type="submit" value="Submit" class="btn btn-primary btn--margin-right">
 </form>
 
-<form action="" method="post" novalidate>{% csrf_token %}
-    <input type="submit" name=cancel value="Cancel">
-</form>
+    <form action="" method="post" novalidate>{% csrf_token %}
+        <input type="submit" name=cancel value="Cancel" class="btn">
+    </form>
+    </div>
+{% endblock %}

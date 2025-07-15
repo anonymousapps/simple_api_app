@@ -1,17 +1,55 @@
-<a href="{% url 'simple_api_app:add_task' %}">Add a task</a>
+{% extends "base.html" %}
 
+{% block navigation %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'simple_api_app:index' %}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'simple_api_app:add_task' %}">Add a task</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
 {% if task_list %}
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Due Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
     {% for task in task_list %}
-        <p>
-        {{ task.title }}, {{ task.description }}, {{ task.status }}, {{ task.due_date }}
-        <form action="{% url 'simple_api_app:edit_task' task.id %}" method="get">
-            <input type="submit" value="Edit">
-        </form>
-        <form action="{% url 'simple_api_app:delete_task' task.id %}" method="get">
-            <input type="submit" value="Delete">
-        </form>
-        </p>
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.due_date }}</td>
+                <td>
+                    <div class="btn-group">
+                        <form action="{% url 'simple_api_app:edit_task' task.id %}" method="get">
+                            <input type="submit" value="Edit" class="btn btn-warning btn--margin-right">
+                        </form>
+                        <form action="{% url 'simple_api_app:delete_task' task.id %}" method="get">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    </div>
+                </td>
+            </tr>
     {% endfor %}
+        </tbody>
+    </table>
 {% else %}
-    <p>There are no tasks yet.</p>
+    <div class="row">
+        <div class="col-xs-12">
+            There are no tasks yet.
+        </div>
+    </div>
 {% endif %}
+
+{% endblock %}
