@@ -8,6 +8,7 @@ class StatusSerializerWeb(serializers.HyperlinkedModelSerializer):
 
 class TaskSerializerWeb(serializers.HyperlinkedModelSerializer):
     status_name = serializers.ReadOnlyField(source='status.name')
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Task
