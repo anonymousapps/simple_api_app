@@ -29,6 +29,20 @@ The status is a defined set of values stored on the database.
 - Show tasks near due in different colour
 - Add user login so everyone has a seperate task list
 
+## Screenshots
+
+The task list:
+![Alt text](screenshots/task_list_page.png?raw=true "The task list page")
+
+The add task screen:
+![Alt text](screenshots/add_task_page.png?raw=true "The add task page")
+
+The edit task screen:
+![Alt text](screenshots/edit_task_page.png?raw=true "The edit task page")
+
+Delete confirmation:
+![Alt text](screenshots/delete_confirmation.png?raw=true "The delete confirmation")
+
 ## Requirements
 
 Django needs to be installed locally for development. See:
