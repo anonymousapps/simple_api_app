@@ -22,30 +22,32 @@ The status is a defined set of values stored on the database.
 - Navigation of tasks using https://datatables.net/
 - Filters out tasks that have a status of Done (this assumes we add a status of Done)
 - If a date is in the past (overdue) the text is shown in red
+- Web based REST API and endpoints using [Django REST framework](https://www.django-rest-framework.org/) (See [below](#rest-api) for more details)
 
-**Possible future improvements**
+**Possible future improvements (depending on requirements)**
 
 - Show tasks that are Done in seperate page just as a list without Edit and Delete.
 - Show tasks near due in different colour
 - Add user login so everyone has a seperate task list
+- Add authentication to endpoints using [this guide](https://www.django-rest-framework.org/api-guide/authentication/)
 
 ## Screenshots
 
 The task list:
 
-![The task list page](screenshots/task_list_page.png?raw=true)
+![Alt text](screenshots/task_list_page.png?raw=true "The task list page")
 
 The add task screen:
 
-![The add task page](screenshots/add_task_page.png?raw=true)
+![Alt text](screenshots/add_task_page.png?raw=true "The add task page")
 
 The edit task screen:
 
-![The edit task page](screenshots/edit_task_page.png?raw=true)
+![Alt text](screenshots/edit_task_page.png?raw=true "The edit task page")
 
 Delete confirmation:
 
-![The delete confirmation](screenshots/delete_confirmation.png?raw=true)
+![Alt text](screenshots/delete_confirmation.png?raw=true "The delete confirmation")
 
 ## Requirements
 
@@ -140,7 +142,9 @@ python manage.py test simple_api_app
 
 A REST API has been implemented using [Django REST Framework](https://www.django-rest-framework.org/).
 
-This enables intereacting with the Status and Task data via an API. For example:
+This enables interacting with the Status and Task data via an API in two ways:
+
+(1) Web API
 
 http://127.0.0.1:8000/api - The API root
 
@@ -150,10 +154,34 @@ http://127.0.0.1:8000/api/status/2/ - shows the status with id 2
 http://127.0.0.1:8000/api/tasks/ - shows all tasks
 http://127.0.0.1:8000/api/tasks/1/ - shows the task with id 1
 
-Using a curl request we may use something like this to get all the tasks in json format:
+(2) Via endpoints
+
+Get all tasks:
 
 ```
-curl -u rgidding -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/api/tasks/
+curl -X GET http://127.0.0.1:8000/api/task_list/
 ```
 
-Further improvements could be made for [permissions](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/), for allowing more curl requests and updates etc from only specific users.
+Add a task:
+
+```
+curl -X POST -d 'status=2&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00' http://127.0.0.1:8000/api/task_list/
+```
+
+Get a task:
+
+```
+curl -X GET http://127.0.0.1:8000/api/task_list/23/
+```
+
+Edit a task:
+
+```
+curl -X PUT -d 'status=3&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00' http://127.0.0.1:8000/api/task_list/23/
+```
+
+Delete a task:
+
+```
+curl -X DELETE http://127.0.0.1:8000/api/task_list/23/
+```

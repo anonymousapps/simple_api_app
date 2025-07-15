@@ -27,6 +27,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('simpleapi/', include("simple_api_app.urls")),
 
+    # web based API (with urls)
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # API calls
+    path('api/task_list/', views.TaskList.as_view()),
+    path('api/task_list/<int:pk>/', views.TaskDetail.as_view()),
 ]
