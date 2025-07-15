@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.views import generic
+from django.db.models import Q
 
 from rest_framework import viewsets
 from .serializers import TaskSerializer, StatusSerializer
@@ -22,7 +23,7 @@ class IndexView(generic.ListView):
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        return Task.objects.order_by("due_date")
+        return Task.objects.filter(~Q(status__name='Done')).order_by("due_date")
 
 # Add/Edit a Task
 def task(request, task_id=None):

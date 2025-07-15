@@ -20,6 +20,12 @@ The status is a defined set of values stored on the database.
 - Formatting using https://getbootstrap.com/
 - Datetime picker for entering the due date
 - Navigation of tasks using https://datatables.net/
+- Filters out tasks that have a status of Done (this assumes we add a status of Done)
+
+**Possible future improvements**
+
+- Show tasks that are Done in seperate page just as a list without Edit and Delete.
+- Show tasks near due in different colour
 
 ## Requirements
 
