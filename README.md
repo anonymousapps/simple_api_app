@@ -17,8 +17,9 @@ The status is a defined set of values stored on the database.
 
 - Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
 - Add/Edit/Delete of status and tasks using rest api via http://127.0.0.1:8000/api/
+- Formatting using https://getbootstrap.com/
 - Datetime picker for entering the due date
-- Pagination for the list of tasks
+- Navigation of tasks using https://datatables.net/
 
 ## Requirements
 

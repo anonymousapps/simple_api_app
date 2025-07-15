@@ -14,7 +14,7 @@ class Task(models.Model):
     description = models.CharField(
                     max_length=256,
                     blank=True, default='', 
-                    help_text='A longer description for the task')
+                    help_text='A longer description for the task (optional)')
 
     status = models.ForeignKey(
                     Status, 
@@ -22,7 +22,6 @@ class Task(models.Model):
                     help_text='The task status')
 
     due_date = models.DateTimeField(
-                    'Due date/time', 
                     help_text='When the task is due')
 
     def __str__(self):

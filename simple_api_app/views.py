@@ -22,23 +22,7 @@ class IndexView(generic.ListView):
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        default_page = 1
-        page = self.request.GET.get('page', default_page)
-
-        tasks = Task.objects.order_by("due_date")
-
-        # Paginate items
-        tasks_per_page = 5
-        paginator = Paginator(tasks,tasks_per_page)
-
-        try:
-            tasks_page = paginator.page(page)
-        except PageNotAnInteger:
-            tasks_page = paginator.page(default_page)
-        except EmptyPage:
-            tasks_page = paginator.page(paginator.num_pages)
-
-        return tasks_page
+        return Task.objects.order_by("due_date")
 
 # Add/Edit a Task
 def task(request, task_id=None):
