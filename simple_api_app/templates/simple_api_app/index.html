@@ -25,7 +25,7 @@
         </thead>
         <tbody>
     {% for task in task_list %}
-            <tr>
+            <tr {% if task.due_date_in_the_past %}class="overdue"{% endif %}>
                 <td>{{ task.title }}</td>
                 <td>{{ task.description }}</td>
                 <td>{{ task.status }}</td>

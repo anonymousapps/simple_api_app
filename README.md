@@ -21,6 +21,7 @@ The status is a defined set of values stored on the database.
 - Datetime picker for entering the due date
 - Navigation of tasks using https://datatables.net/
 - Filters out tasks that have a status of Done (this assumes we add a status of Done)
+- If a date is in the past (overdue) the text is shown in red
 
 **Possible future improvements**
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Status(models.Model):
     name = models.CharField(max_length=32)
@@ -23,6 +24,10 @@ class Task(models.Model):
 
     due_date = models.DateTimeField(
                     help_text='When the task is due')
+
+    @property
+    def due_date_in_the_past(self):
+        return self.due_date <= timezone.now()
 
     def __str__(self):
         return self.title
