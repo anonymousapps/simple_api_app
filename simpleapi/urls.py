@@ -34,4 +34,7 @@ urlpatterns = [
     # API calls
     path('api/task_list/', views.TaskList.as_view()),
     path('api/task_list/<int:pk>/', views.TaskDetail.as_view()),
+
+    # User management
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

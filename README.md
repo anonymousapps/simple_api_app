@@ -16,6 +16,7 @@ The status is a defined set of values stored on the database.
 ## Features of the simple api app
 
 - Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
+- User login so user can only See and Add/Edit/Delete their tasks
 - Formatting using https://getbootstrap.com/
 - Datetime picker for entering the due date
 - Navigation of tasks using https://datatables.net/
@@ -27,7 +28,6 @@ The status is a defined set of values stored on the database.
 
 - Show tasks that are Done in seperate page just as a list without Edit and Delete.
 - Show tasks near due in different colour
-- Add user login so everyone has a seperate task list
 - Add authentication to endpoints using [this guide](https://www.django-rest-framework.org/api-guide/authentication/)
 
 ## Screenshots

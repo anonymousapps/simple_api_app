@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block navigation %}
+
+{% if user.is_authenticated %}
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link active" href="{% url 'simple_api_app:index' %}">Home</a>
@@ -9,52 +12,68 @@
         <a class="nav-link" href="{% url 'simple_api_app:add_task' %}">Add a task</a>
     </li>
 </ul>
+
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
-{% if task_list %}
-    <table class="table" id="tasks">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Status</th>
-                <th scope="col">Due Date</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    {% for task in task_list %}
-            <tr {% if task.due_date_in_the_past %}class="overdue"{% endif %}>
-                <td>{{ task.title }}</td>
-                <td>{{ task.description }}</td>
-                <td>{{ task.status }}</td>
-                <td>{{ task.due_date }}</td>
-                <td>
-                    <div class="btn-group">
-                        <form action="{% url 'simple_api_app:edit_task' task.id %}" method="get">
-                            <input type="submit" value="Edit" class="btn btn-warning btn--margin-right">
-                        </form>
-                        <form action="{% url 'simple_api_app:delete_task' task.id %}" method="get">
-                            <input type="submit" value="Delete" class="btn btn-danger">
-                        </form>
-                    </div>
-                </td>
-            </tr>
-    {% endfor %}
-        </tbody>
-    </table>
-{% else %}
-    <div class="row">
-        <div class="col-xs-12">
-            There are no tasks yet.
+
+{% if user.is_authenticated %}
+
+    {% if task_list %}
+        <table class="table" id="tasks">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Due Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for task in task_list %}
+                <tr {% if task.due_date_in_the_past %}class="overdue"{% endif %}>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <form action="{% url 'simple_api_app:edit_task' task.id %}" method="get">
+                                <input type="submit" value="Edit" class="btn btn-warning btn--margin-right">
+                            </form>
+                            <form action="{% url 'simple_api_app:delete_task' task.id %}" method="get">
+                                <input type="submit" value="Delete" class="btn btn-danger">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="row">
+            <div class="col-xs-12">
+                There are no tasks yet.
+            </div>
         </div>
+    {% endif %}
+
+{% else %}
+<div class="d-flex justify-content-center" >
+    <div class="d-flex align-items-center" style="height: 180px;">
+        <a href="{% url 'login' %}">Please Log In</a>
     </div>
+</div>
 {% endif %}
 
 {% endblock %}
 
 {% block footer %}
+
+{% if user.is_authenticated %}
 
 {% if task_list.has_other_pages %}
 <div class="btn-group" role="group" aria-label="Item pagination">
@@ -78,6 +97,8 @@
         <a href="?page={{ task_list.next_page_number }}" class="btn btn-outline-primary">&raquo;</a>
     {% endif %}
 </div>
+{% endif %}
+
 {% endif %}
 
 {% endblock %}

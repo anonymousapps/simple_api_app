@@ -1,6 +1,8 @@
 # Django imports
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.views import generic
@@ -27,14 +29,16 @@ from .forms import TaskForm
 # 
 
 # Show Tasks
+@method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
     template_name = 'simple_api_app/index.html'
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        return Task.objects.filter(~Q(status__name='Done')).order_by("due_date")
+        return Task.objects.filter(~Q(status__name='Done'), user=self.request.user).order_by("due_date")
 
 # Add/Edit a Task
+@login_required
 def task(request, task_id=None):
 
     if "cancel" in request.POST:
@@ -42,18 +46,25 @@ def task(request, task_id=None):
 
     if task_id:
         task = get_object_or_404(Task, pk=task_id)
+
+        # check someone isn't trying to just send a url to 
+        # edit someone elses task
+        if task.user != request.user:
+            return HttpResponse('Unauthorized', status=401)
     else:
         task = Task()
 
     form = TaskForm(request.POST or None, instance=task)
     if request.POST:
         if form.is_valid():
+            form.instance.user = request.user
             form.save()
         return HttpResponseRedirect(reverse('simple_api_app:index'))
 
     return render(request, "simple_api_app/task.html", {"form": form})
 
 # Delete a Task
+@method_decorator(login_required, name='dispatch')
 class TaskDeleteView(DeleteView):
 
     model = Task
@@ -65,6 +76,15 @@ class TaskDeleteView(DeleteView):
             return HttpResponseRedirect(reverse('simple_api_app:index'))
         else:
             return super(TaskDeleteView, self).post(request, *args, **kwargs)
+
+    def dispatch(self, *args, **kwargs):
+
+        # Only allow deletion of a task belonging to logged in user
+        task_instance = self.get_object()
+        task_user = task_instance.user
+        if task_user != self.request.user:
+            return HttpResponse('Unauthorized', status=401)
+        return super().dispatch(*args, **kwargs)
 
 #
 # DJANGO REST FRAMEWORK VIEWS

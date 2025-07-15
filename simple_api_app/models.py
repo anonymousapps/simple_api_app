@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Status(models.Model):
     name = models.CharField(max_length=32)
@@ -24,6 +25,11 @@ class Task(models.Model):
 
     due_date = models.DateTimeField(
                     help_text='When the task is due')
+
+    user = models.ForeignKey(User, 
+                            models.SET_NULL,
+                            blank=True,
+                            null=True)
 
     @property
     def due_date_in_the_past(self):

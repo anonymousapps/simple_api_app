@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 
 {% block navigation %}
+
+{% if user.is_authenticated %}
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" href="{% url 'simple_api_app:index' %}">Home</a>
     </li>
 </ul>
+
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+
 <form action="" method="post">{% csrf_token %}
     {% for field in form %}
     <div class="form-group">
@@ -35,4 +44,12 @@
         <input type="submit" name=cancel value="Cancel" class="btn">
     </form>
     </div>
+
+{% else %}
+
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a>
+
+{% endif %}
+
 {% endblock %}

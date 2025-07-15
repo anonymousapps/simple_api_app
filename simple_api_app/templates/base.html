@@ -58,7 +58,31 @@
 <body>
     <div id="page" class="container">
         <header>
-            <h1 justify-content-md-center">Task Management</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <h1>TASK&nbsp;MANAGEMENT</h1>
+                    </div>
+                    <div class="col-sm">
+                    {% if user.is_authenticated %}
+                        <div class="row">
+                            <div class="col text-right">
+                                <div class="username">User: {{ user.username }}</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <form action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-sm">Log Out</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
             <nav>{% block navigation %}{% endblock %}</nav>
         </header>
         <section>

@@ -73,6 +73,9 @@ TEMPLATES = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "/simpleapi/"
+LOGOUT_REDIRECT_URL = "/accounts/login/"
+
 WSGI_APPLICATION = 'simpleapi.wsgi.application'
 
 

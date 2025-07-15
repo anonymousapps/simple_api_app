@@ -8,6 +8,10 @@ body {
     margin-top: 10px;
 }
 
+.username {
+    margin-bottom: 10px;
+}
+
 .dt-input {
     margin-right: 10px;
 }
