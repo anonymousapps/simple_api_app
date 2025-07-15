@@ -13,6 +13,11 @@ This app enables the adding of a tasks with the fields:
 
 The status is a defined set of values stored on the database.
 
+## Features of the simple api app
+
+- Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
+- Add/Edit/Delete of status and tasks using rest api via http://127.0.0.1:8000/api/
+
 ## Requirements
 
 Django needs to be installed locally for development. See:
@@ -123,8 +128,3 @@ curl -u rgidding -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/a
 ```
 
 Further improvements could be made for [permissions](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/), for allowing more curl requests and updates etc from only specific users.
-
-## Features of the simple api app
-
-- Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
-- Add/Edit/Delete of status and tasks using rest api via http://127.0.0.1:8000/api/
