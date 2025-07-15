@@ -16,7 +16,6 @@ The status is a defined set of values stored on the database.
 ## Features of the simple api app
 
 - Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
-- Add/Edit/Delete of status and tasks using rest api via http://127.0.0.1:8000/api/
 - Formatting using https://getbootstrap.com/
 - Datetime picker for entering the due date
 - Navigation of tasks using https://datatables.net/
@@ -97,7 +96,7 @@ then \q to exit.
 To use the Postgres with Python we need an additional package:
 https://www.psycopg.org/psycopg3/docs/basic/install.html
 
-Add a database caslled 'tasks' in Postgres then run:
+Add a database called 'tasks' in Postgres then run:
 
 ```
 python manage.py makemigrations simple_api_app
@@ -114,6 +113,12 @@ To install:
 
 ```
 sudo apt install python3.10-venv
+```
+
+To add the venv:
+
+```
+python -m venv django-env
 ```
 
 To enter the virual environment:
@@ -145,6 +150,8 @@ A REST API has been implemented using [Django REST Framework](https://www.django
 This enables interacting with the Status and Task data via an API in two ways:
 
 (1) Web API
+
+Add/Edit/Delete and viewing of tasks, statuses. E.g.
 
 http://127.0.0.1:8000/api - The API root
 
