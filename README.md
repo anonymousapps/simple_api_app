@@ -17,7 +17,7 @@ This app enables the adding of a tasks with the fields:
 
 The status is a defined set of values stored on the database.
 
-## Features of the simple api app
+## Features of the standalone Django app
 
 - Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
 - User login so user can only See and Add/Edit/Delete their tasks
