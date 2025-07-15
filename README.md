@@ -5,10 +5,11 @@
 A simple API app using Python and Django using Postgres. I used Ubuntu and VSCode for development.
 
 This app enables the adding of a tasks with the fields:
-title
-description
-status
-due date
+
+- title
+- description (optional)
+- status
+- due date
 
 The status is a defined set of values stored on the database.
 
