@@ -32,16 +32,20 @@ The status is a defined set of values stored on the database.
 ## Screenshots
 
 The task list:
-![Alt text](screenshots/task_list_page.png?raw=true "The task list page")
+
+![The task list page](screenshots/task_list_page.png?raw=true)
 
 The add task screen:
-![Alt text](screenshots/add_task_page.png?raw=true "The add task page")
+
+![The add task page](screenshots/add_task_page.png?raw=true)
 
 The edit task screen:
-![Alt text](screenshots/edit_task_page.png?raw=true "The edit task page")
+
+![The edit task page](screenshots/edit_task_page.png?raw=true)
 
 Delete confirmation:
-![Alt text](screenshots/delete_confirmation.png?raw=true "The delete confirmation")
+
+![The delete confirmation](screenshots/delete_confirmation.png?raw=true)
 
 ## Requirements
 
