@@ -172,7 +172,7 @@ curl -X GET http://127.0.0.1:8000/api/task_list/
 Add a task:
 
 ```
-curl -X POST -d 'status=2&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00' http://127.0.0.1:8000/api/task_list/
+curl -X POST -d 'status=2&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00&user=1' http://127.0.0.1:8000/api/task_list/
 ```
 
 Get a task:
