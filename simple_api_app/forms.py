@@ -1,7 +1,13 @@
 from django import forms
+from django.forms import fields
 from .models import Task
+from formset.widgets import DateTimeInput
 
 class TaskForm(forms.ModelForm):
+
+    due_date = fields.DateTimeField(
+        widget=DateTimeInput
+    )
 
     class Meta:
         model = Task
