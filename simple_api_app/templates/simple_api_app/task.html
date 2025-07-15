@@ -1,0 +1,16 @@
+<form action="" method="post">{% csrf_token %}
+
+    {% for field in form %}
+    <div class="form-group">
+        <label for="id_{{ field.name }}">{{ field.label }}</label>
+        <p>{{field}}</p>
+        <p>{{field.help_text}}</p>
+    </div>
+    {% endfor %}
+
+    <input type="submit" value="Save">
+</form>
+
+<form action="" method="post" novalidate>{% csrf_token %}
+    <input type="submit" name=cancel value="Cancel">
+</form>

@@ -1,0 +1,17 @@
+<a href="{% url 'simple_api_app:add_task' %}">Add a task</a>
+
+{% if task_list %}
+    {% for task in task_list %}
+        <p>
+        {{ task.title }}, {{ task.description }}, {{ task.status }}, {{ task.due_date }}
+        <form action="{% url 'simple_api_app:edit_task' task.id %}" method="get">
+            <input type="submit" value="Edit">
+        </form>
+        <form action="{% url 'simple_api_app:delete_task' task.id %}" method="get">
+            <input type="submit" value="Delete">
+        </form>
+        </p>
+    {% endfor %}
+{% else %}
+    <p>There are no tasks yet.</p>
+{% endif %}
