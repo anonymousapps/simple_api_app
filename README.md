@@ -6,7 +6,7 @@
 - This is a back-end and front-end in its own right but also exposes an API that can be used by a seperate front-end.
 
 I have written a simple front-end in the following repository:
-https://github.com/richardgiddings/api-frontend
+https://github.com/anonymousapps/api-frontend
 
 This app enables the adding of a tasks with the fields:
 
