@@ -10,13 +10,35 @@ from .serializers import TaskSerializer, StatusSerializer
 from .models import Task, Status
 from .forms import TaskForm
 
+from django.core.paginator import (
+    Paginator,
+    EmptyPage,
+    PageNotAnInteger,
+)
+
 # Show Tasks
 class IndexView(generic.ListView):
     template_name = 'simple_api_app/index.html'
     context_object_name = 'task_list'
 
     def get_queryset(self):
-        return Task.objects.order_by("due_date")
+        default_page = 1
+        page = self.request.GET.get('page', default_page)
+
+        tasks = Task.objects.order_by("due_date")
+
+        # Paginate items
+        tasks_per_page = 5
+        paginator = Paginator(tasks,tasks_per_page)
+
+        try:
+            tasks_page = paginator.page(page)
+        except PageNotAnInteger:
+            tasks_page = paginator.page(default_page)
+        except EmptyPage:
+            tasks_page = paginator.page(paginator.num_pages)
+
+        return tasks_page
 
 # Add/Edit a Task
 def task(request, task_id=None):
