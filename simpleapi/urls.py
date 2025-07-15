@@ -32,6 +32,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # API calls
+    path('api/statuses/', views.StatusList.as_view()),
     path('api/task_list/', views.TaskList.as_view()),
     path('api/task_list/<int:pk>/', views.TaskDetail.as_view()),
 

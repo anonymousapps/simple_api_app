@@ -14,15 +14,18 @@ from django.core.paginator import (
 )
 
 # Django REST framework imports
-from .serializers import TaskSerializerWeb, StatusSerializerWeb, TaskSerializerAPI
+from .serializers import TaskSerializerWeb, StatusSerializerWeb
+from .serializers import TaskSerializerAPI, StatusSerializerAPI, TaskSerializerAPIEditStatus
 from rest_framework import viewsets, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
 
 # internal imports
 from .models import Task, Status
 from .forms import TaskForm
+from  .pagination import TaskListPagination
 
 #
 # FRONT END VIEWS
@@ -100,14 +103,22 @@ class StatusViewSet(viewsets.ModelViewSet):
     queryset = Status.objects.order_by('id')
     serializer_class = StatusSerializerWeb
 
+# Django Rest Framework API calls (statuses)
+
+class StatusList(APIView):
+    # List of statuses
+    def get(self, request, format=None):
+        statuses = Status.objects.all()
+        serializer = StatusSerializerAPI(statuses, many=True)
+        return Response(serializer.data)
+
 # Django Rest Framework API calls (tasks)
 
-class TaskList(APIView):
-    # List of tasks
-    def get(self, request, format=None):
-        tasks = Task.objects.all()
-        serializer = TaskSerializerAPI(tasks, many=True)
-        return Response(serializer.data)
+class TaskList(ListAPIView):
+
+    pagination_class = TaskListPagination
+    queryset = Task.objects.all().order_by("due_date")
+    serializer_class = TaskSerializerAPI
 
     # Add task
     def post(self, request, format=None):
@@ -134,7 +145,7 @@ class TaskDetail(APIView):
     # update a task
     def put(self, request, pk, format=None):
         task = self.get_task(pk)
-        serializer = TaskSerializerAPI(task, data=request.data)
+        serializer = TaskSerializerAPIEditStatus(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

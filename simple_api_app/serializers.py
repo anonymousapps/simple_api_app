@@ -28,3 +28,15 @@ class TaskSerializerAPI(serializers.ModelSerializer):
     def to_representation(self, instance):
         self.fields['due_date'] = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S')
         return super(TaskSerializerAPI, self).to_representation(instance)
+
+class TaskSerializerAPIEditStatus(serializers.ModelSerializer):
+    # seperate to only allow edit of status from API call
+    class Meta:
+        model = Task
+        fields = ['status']
+
+class StatusSerializerAPI(serializers.ModelSerializer):
+
+    class Meta:
+        model = Status
+        fields = '__all__'

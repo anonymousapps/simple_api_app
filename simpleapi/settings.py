@@ -39,17 +39,27 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'formset',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 8
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+]
+CORS_ORIGIN_ALLOW_ALL = False
+
+CSRF_COOKIE_NAME = 'XSRF-TOKEN'
+CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

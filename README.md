@@ -4,6 +4,11 @@
 
 A simple API app using Python and Django using Postgres. I used Ubuntu and VSCode for development.
 
+This is an back-end and front-end in its own right but also exposes an API that can be used by a seperate front-end.
+
+I have written a simple front-end in the following repository:
+https://github.com/richardgiddings/api-frontend
+
 This app enables the adding of a tasks with the fields:
 
 - title
@@ -161,6 +166,8 @@ http://127.0.0.1:8000/api/status/2/ - shows the status with id 2
 http://127.0.0.1:8000/api/tasks/ - shows all tasks
 http://127.0.0.1:8000/api/tasks/1/ - shows the task with id 1
 
+The reason the Web API is seperate is to provide URLs to other parts of the Web API in the responses.
+
 (2) Via endpoints
 
 Get all tasks:
@@ -169,22 +176,28 @@ Get all tasks:
 curl -X GET http://127.0.0.1:8000/api/task_list/
 ```
 
-Add a task:
+Get all statuses:
 
 ```
-curl -X POST -d 'status=2&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00&user=1' http://127.0.0.1:8000/api/task_list/
+curl -X GET http://127.0.0.1:8000/api/statuses/
 ```
 
-Get a task:
+Add a task (description is optional):
+
+```
+curl -X POST -d 'status=2&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00' http://127.0.0.1:8000/api/task_list/
+```
+
+Get a task by id:
 
 ```
 curl -X GET http://127.0.0.1:8000/api/task_list/23/
 ```
 
-Edit a task:
+Edit a task (status):
 
 ```
-curl -X PUT -d 'status=3&title=API Title 2&description=API DESC 2&due_date=2025-08-30 12:04:00' http://127.0.0.1:8000/api/task_list/23/
+curl -X PUT -d 'status=3' http://127.0.0.1:8000/api/task_list/23/
 ```
 
 Delete a task:
