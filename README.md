@@ -2,9 +2,8 @@
 
 ## Introduction
 
-A simple API app using Python and Django using Postgres. I used Ubuntu and VSCode for development.
-
-This is an back-end and front-end in its own right but also exposes an API that can be used by a seperate front-end.
+- An app using Python and Django using Postgres. I used Ubuntu and VSCode for development.
+- This is a back-end and front-end in its own right but also exposes an API that can be used by a seperate front-end.
 
 I have written a simple front-end in the following repository:
 https://github.com/richardgiddings/api-frontend
