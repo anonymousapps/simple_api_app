@@ -26,6 +26,7 @@ The status is a defined set of values stored on the database.
 
 - Show tasks that are Done in seperate page just as a list without Edit and Delete.
 - Show tasks near due in different colour
+- Add user login so everyone has a seperate task list
 
 ## Requirements
 
