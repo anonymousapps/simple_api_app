@@ -4,7 +4,10 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.views import generic
 
-from .models import Task
+from rest_framework import viewsets
+from .serializers import TaskSerializer, StatusSerializer
+
+from .models import Task, Status
 from .forms import TaskForm
 
 # Show Tasks
@@ -46,3 +49,13 @@ class TaskDeleteView(DeleteView):
             return HttpResponseRedirect(reverse('simple_api_app:index'))
         else:
             return super(TaskDeleteView, self).post(request, *args, **kwargs)
+
+# Django Rest Framweork view for tasks.
+class TasksViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.order_by('id')
+    serializer_class = TaskSerializer
+
+# Django Rest Framweork view for status.
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.order_by('id')
+    serializer_class = StatusSerializer

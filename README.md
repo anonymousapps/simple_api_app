@@ -4,6 +4,14 @@
 
 A simple API app using Python and Django using Postgres. I used Ubuntu and VSCode for development.
 
+This app enables the adding of a tasks with the fields:
+title
+description
+status
+due date
+
+The status is a defined set of values stored on the database.
+
 ## Requirements
 
 Django needs to be installed locally for development. See:
@@ -93,7 +101,29 @@ To run the tests:
 python manage.py test simple_api_app
 ```
 
+## REST API
+
+A REST API has been implemented using [Django REST Framework](https://www.django-rest-framework.org/).
+
+This enables intereacting with the Status and Task data via an API. For example:
+
+http://127.0.0.1:8000/api - The API root
+
+http://127.0.0.1:8000/api/status/ - shows all statuses
+http://127.0.0.1:8000/api/status/2/ - shows the status with id 2
+
+http://127.0.0.1:8000/api/tasks/ - shows all tasks
+http://127.0.0.1:8000/api/tasks/1/ - shows the task with id 1
+
+Using a curl request we may use something like this to get all the tasks in json format:
+
+```
+curl -u rgidding -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/api/tasks/
+```
+
+Further improvements could be made for [permissions](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/), for allowing more curl requests and updates etc from only specific users.
+
 ## Features of the simple api app
 
-- Add/Edit/Delete of tasks
--
+- Add/Edit/Delete of tasks using front-end via http://127.0.0.1:8000/simpleapi/
+- Add/Edit/Delete of status and tasks using rest api via http://127.0.0.1:8000/api/
