@@ -12,7 +12,8 @@ class Task(models.Model):
                     help_text='Title for the task')
 
     description = models.CharField(
-                    max_length=256, 
+                    max_length=256,
+                    blank=True, default='', 
                     help_text='A longer description for the task')
 
     status = models.ForeignKey(
